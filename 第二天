@@ -3,4 +3,40 @@
     //今天学习了，如何查QT的帮助文档，其实QT的帮助文档，就是Qt这个由于多数的API封装起来的库的文档，这个文档按照不同API的性质，将不同API的属性和方法进行了说明，如果要完成每某一个动作的话，就检索对应的API，
       然后点击里面的Detailed Description去大概有一个例子参考
 
-    //例如，今天做的这个打开文件的内容
+//例如，今天做的这个打开文件的内容
+
+QT里面就已经封装好了两种实现方式，一种简单的但是功能受限，一种复杂的，自定义的，功能不受限的实现
+
+        //功能受限
+            //开始直接将点击这个按钮的方法通过调用这个QFileDialog类下的getOpenFileName方法去打开对话框，并得到一个路径名赋值给FileName
+           QString fileName=QFileDialog::getOpenFileName(this, tr("Open File"),"E:/QT_study/Study_Note_QT/eight/nb.txt",
+                 tr("Images (*.png *.xpm *.jpg);;Text files (*.txt);;XML files (*.xml)"));
+            
+            //然后将文件路径给设置为这个对象的路径
+
+            //打开文件并设置打开文件的权限
+            QFile file;
+            file.setFileName("E:/QT_study/Study_Note_QT/eight/test.txt");
+            file.open(QIODevice::ReadOnly | QIODevice::Text);
+            //定义一个数组去接收打开文件的内容
+            char context[100]={'\0'};
+   
+            //在通过实例化对象去调用该对象里面已经封装好的read方法去将文件的内容去读到数组里面去
+             file.read(context,100);
+            //输出读到的文件的内容
+             qDebug()<<context;
+                file.close();
+
+      //功能不受限（但是今天这个老师也没有讲具体的实现，只是讲了这个输出路径名，
+             //实例化对象
+            QFileDialog dialog;
+             //设置对话框模式
+             dialog.setFileMode(QFileDialog::ExistingFiles);
+            //设置过滤器
+            dialog.setNameFilter("*.txt");
+            //显示对话框
+            dialog.exec();
+             QStringList qstrings =dialog.selectedFiles();
+           for(QString str: qstrings){
+             qDebug()<<str;
+               }    
