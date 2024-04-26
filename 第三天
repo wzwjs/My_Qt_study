@@ -1,0 +1,8 @@
+//今天的从qt的开发中，知道了，其实qt的开发，首先针对于不同的控件，找到其属于那一个类，针对于其目标需求，去帮助文档找该类里面是不是已经封装好了对应的实现方法，有就直接调用，没有的话，就直接去写一个
+
+     QTextStream out(&file);
+     out.setCodec("UTF-8");
+     QString content= ui->textEdit->toPlainText();
+     out<<content;
+ QTextStream这个类，既有输出，也有文本输入的实现
+
