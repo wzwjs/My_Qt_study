@@ -1,0 +1,28 @@
+//今天完成了四个任务点，评分良好，不足就是起床太晚了，拖了脚步
+
+    //第一，打开，关闭，保存的时候，以当前文件名在左边标题栏显示
+    //第二，当前鼠标所在行的位置高亮并下划线
+    //第三，C++类模板的引入和函数模板的引入
+    //第四，QList类的引入和使用
+
+//第一，直接在打开，关闭，保存对应的槽函数获取当前路径的后面加上
+    this->setWindowTitle(File_Path_Current);
+//第二，要实现当前鼠标所在行的位置高亮并显示下划线，
+    //首先，要获取当前鼠标所在行的坐标(在头文件里面声明一个槽函数，在对应的源文件里面，链接具体的信号并实现该槽函数）
+          该槽函数，首先通过UI类的textEdit类下的textCursor方法获得该位置并定义一个QTextCusor变量去接到该位置
+    //其次，通过已经有的API去让当前行高亮并显示下划线即可
+       
+    QBrush qBrush(Qt::lightGray);
+    //2，设置当前行的颜色
+
+    ext.format.setBackground(qBrush);
+    //配置段属性，整行显示，没有这一句话，不行
+    ext.format.setProperty(QTextFormat::FullWidthSelection,true);
+    ext.format.setFontUnderline(true);
+    //3,设置当前行
+    //将ext加到ext的容器中
+    extraSelections.append(ext);
+    ui->textEdit->setExtraSelections(extraSelections);
+
+
+    
